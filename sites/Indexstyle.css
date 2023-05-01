@@ -1,0 +1,171 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --color-Primary--1: rgb(31, 68, 75);
+}
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* Header */
+header {
+  background-color: var(--color-Primary--1);
+  color: #fff;
+  height: 30vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  text-align: center;
+}
+
+header img {
+  width: auto;
+  height: 80px;
+}
+
+/* Knapper */
+button {
+  font-size: 1.2rem;
+  margin-top: 15px;
+  padding: 10px 20px;
+}
+
+/* Slider */
+.slider-container {
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.slider {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  max-height: 100%;
+  overflow: hidden;
+}
+
+.slide {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  transition: opacity 0.5s;
+}
+
+.slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.btn {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  padding: 10px;
+  border: none;
+  border-radius: 50%;
+  z-index: 10px;
+  cursor: pointer;
+  background-color: #fff;
+  font-size: 18px;
+}
+
+.btn:active {
+  transform: scale(1.1);
+}
+
+.btn-prev {
+  top: 30%;
+  left: 2%;
+}
+
+.btn-next {
+  top: 30%;
+  right: 2%;
+}
+
+/* Modal */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 80%;
+  max-width: 500px;
+  height: auto;
+  overflow: auto;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+}
+
+.modal-content {
+  padding: 20px;
+}
+.modal-open .slide {
+  opacity: 0.5;
+}
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus {
+  outline: none;
+  border-color: #66afe9;
+  box-shadow: 0px 0px 5px #66afe9;
+}
+.modal input[type="text"],
+.modal input[type="email"],
+.modal input[type="password"] {
+  width: 90%;
+  max-width: 400px;
+}
+
+/* Footer */
+footer {
+  background-color: var(--color-Primary--1);
+  height: 8vh;
+  color: #66afe9;
+  position: fixed;
+  font-weight: 600;
+  text-align: center;
+  padding: 20px;
+  bottom: 0;
+  width: 100%;
+}

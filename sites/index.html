@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/sites/Indexstyle.css" />
+    <title>Workout</title>
+  </head>
+  <body>
+    <header>
+      <img src="/img/logo.png" alt="Logo" />
+      <h1>TreningsLoggen</h1>
+      <div>
+        <button id="loginBtn">Logg inn</button>
+        <button id="registerBtn">Registrer ny bruker</button>
+    </header>
+    <!-- innlogging -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+          <span class="close">&times;</span>
+          <form id="loginForm">
+            <label for="loginUsername">Brukernavn:</label>
+            <input type="text" id="loginUsername" name="username" required />
+            <br />
+            <label for="loginPassword">Passord:</label>
+            <input type="password" id="loginPassword" name="password" required />
+            <br />
+            <input type="submit" value="Logg inn" />
+          </form>
+        </div>
+      </div>
+  <!--registrering -->
+  <div id="registerModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <form id="registerForm">
+        <label for="name">Navn:</label>
+        <input type="text" id="name" name="name" required />
+        <br />
+        <label for="phone">Telefon:</label>
+        <input type="tel" id="phone" name="phone" required />
+        <br />
+        <label for="username">Brukernavn:</label>
+        <input type="text" id="username" name="username" required />
+        <br />
+        <label for="password">Passord:</label>
+        <input type="password" id="password" name="password" required />
+        <br />
+        <input type="submit" value="Registrer" />
+      </form>
+    </div>
+  </div>
+  <main>
+    <div class="slider-container">
+        <div class="slider">
+            <!-- slide 1 -->
+            <div class="slide">
+              <img src="/img/cycling_Mountain.jpg" alt="cycling Mountain" />
+            </div>
+          
+            <!-- slide 2 -->
+            <div class="slide">
+              <img src="/img/cyclists-team.jpg" alt="cycling Team" />
+            </div>
+          
+            <!-- slide 3 -->
+            <div class="slide">
+              <img src="/img/running_man.jpg" alt="Running Man" />
+            </div>
+          
+            <!-- slide 4 -->
+            <div class="slide">
+              <img src="/img/running_woman.jpg" alt="Running Woman" />
+            </div>
+          
+            <!-- Control buttons -->
+            <button class="btn btn-next"> > </button>
+            <button class="btn btn-prev"> < </button>
+          </div>
+  </main>
+    <footer>
+      <p>Copyright © 2023</p>
+    </footer>
+    <script src="/sites/index.js"></script>
+  </body>
+</html>
