@@ -5,18 +5,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="../Styles/style.css">
   <link rel="stylesheet" href="./FrontPage_Style.css">
-  <title>Workout Tracker</title>
+  <title>Workout Logger</title>
 </head>
 <body>
   <header>
     <img src="../Assets/logo.png" alt="Logo">
-    <h1>Workout Tracker</h1>
+    <h1>Workout Logger</h1>
+    <button id="headerLoginBtn" class="header-login-btn">Logg inn</button>
   </header>
 
   <!-- Innlogging -->
   <div id="loginModal" class="modal">
     <div class="modal-content">
-      <span class="close">&times;</span>
+      <span class="close" onclick="closeModal('loginModal')">&times;</span>
+      <h2>Logg inn</h2>
       <form id="loginForm">
         <label for="loginUsername">Brukernavn:</label>
         <input type="text" id="loginUsername" name="username" required />
@@ -33,7 +35,8 @@
   <!-- Registrering -->
   <div id="registerModal" class="modal">
     <div class="modal-content">
-      <span class="close">&times;</span>
+      <span class="close" onclick="closeModal('registerModal')">&times;</span>
+      <h2>Registrer</h2>
       <form id="registerForm">
         <label for="registerName">Navn:</label>
         <input type="text" id="registerName" name="name" required />

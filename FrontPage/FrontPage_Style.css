@@ -1,5 +1,5 @@
 /* General Styles */
-@import url('./style.css');
+@import url('../Styles/Style.css');
 
 :root {
   --color-primary: rgb(31, 68, 75);
@@ -26,11 +26,29 @@ header {
   color: #fff;
   text-align: center;
   padding: 20px;
+  position: relative;
 }
 
 header img {
   width: auto;
   height: 80px;
+}
+
+.header-login-btn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background-color: var(--color-secondary);
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+.header-login-btn:hover {
+  background-color: #45a049;
 }
 
 /* Main Container */
@@ -42,7 +60,7 @@ main {
 }
 
 .background-image {
-  background-image: url('../Assets/your-background-image.jpg');
+  background-image: url('../Assets/cycling_Mountain.jpg');
   background-size: cover;
   background-position: center;
   width: 100%;
@@ -60,20 +78,25 @@ main {
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
+  display: none;
   align-items: center;
   justify-content: center;
+  z-index: 1000;
 }
 
 .modal-content {
   background-color: #fff;
-  padding: 20px;
+  padding: 30px;
   border-radius: 10px;
   position: relative;
   max-width: 500px;
-  width: 90%;
+  width: 100%;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   text-align: center;
+}
+
+.modal-content h2 {
+  margin-bottom: 20px;
 }
 
 .modal-content form {
@@ -94,6 +117,7 @@ main {
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
+  width: 90%;
 }
 
 .modal-content input[type="submit"] {
@@ -104,6 +128,7 @@ main {
   cursor: pointer;
   border-radius: 5px;
   font-size: 1rem;
+  margin-top: 10px;
 }
 
 .modal-content input[type="submit"]:hover {
@@ -131,4 +156,48 @@ footer {
   position: fixed;
   bottom: 0;
   width: 100%;
+}
+/* Alert Modal */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 10px;
+  position: relative;
+  max-width: 500px;
+  width: 100%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.modal-content h2 {
+  margin-bottom: 20px;
+}
+
+.modal-content p {
+  font-size: 1.2rem;
+}
+
+.close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: red;
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 50%;
+  cursor: pointer;
 }
