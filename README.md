@@ -1,7 +1,6 @@
 # Js_Eksamen_GA
 
-KonteEksamen
-
+## Mai 2023
 RandomUser API
 Leaflet API
 

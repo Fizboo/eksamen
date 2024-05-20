@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../Styles/style.css">
+  <link rel="stylesheet" href="./FrontPage_Style.css">
+  <title>Workout Tracker</title>
+</head>
+<body>
+  <header>
+    <img src="../Assets/logo.png" alt="Logo">
+    <h1>Workout Tracker</h1>
+  </header>
+
+  <!-- Innlogging -->
+  <div id="loginModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <form id="loginForm">
+        <label for="loginUsername">Brukernavn:</label>
+        <input type="text" id="loginUsername" name="username" required />
+        <br />
+        <label for="loginPassword">Passord:</label>
+        <input type="password" id="loginPassword" name="password" required />
+        <br />
+        <input type="submit" value="Logg inn" />
+      </form>
+      <p>Hvis du ikke har en konto, <a href="#" id="showRegister">registrer deg her</a>.</p>
+    </div>
+  </div>
+
+  <!-- Registrering -->
+  <div id="registerModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <form id="registerForm">
+        <label for="registerName">Navn:</label>
+        <input type="text" id="registerName" name="name" required />
+        <br />
+        <label for="registerUsername">Brukernavn:</label>
+        <input type="text" id="registerUsername" name="username" required />
+        <br />
+        <label for="registerPassword">Passord:</label>
+        <input type="password" id="registerPassword" name="password" required />
+        <br />
+        <input type="submit" value="Registrer" />
+      </form>
+    </div>
+  </div>
+
+  <main>
+    <div class="background-image"></div>
+  </main>
+
+  <footer>
+    <p>Copyright © 2023</p>
+  </footer>
+
+  <script src="./Index.js"></script>
+</body>
+</html>
