@@ -6,27 +6,28 @@ export class MapHandler {
 	#mapEvent;
 
 	constructor() {
-		this._loadMap();
+		this.getPosition();
 	}
 
-	_loadMap() {
-		navigator.geolocation.getCurrentPosition(
-			(position) => {
-				const { latitude, longitude } = position.coords;
-				const coords = [latitude, longitude];
-				this.#map = L.map("map").setView(coords, this.#mapZoomLevel);
+	getPosition() {
+		if (navigator.geolocation) {
+			navigator.geolocation.getCurrentPosition(this._loadMap.bind(this), () => {
+				alert("Kunne ikke få posisjonen din");
+			});
+		}
+	}
 
-				L.tileLayer("https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png", {
-					attribution:
-						'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-				}).addTo(this.#map);
+	_loadMap(position) {
+		const { latitude, longitude } = position.coords;
+		const coords = [latitude, longitude];
+		this.#map = L.map("map").setView(coords, this.#mapZoomLevel);
 
-				this.#map.on("click", this._showForm.bind(this));
-			},
-			() => {
-				alert("Could not get your position");
-			},
-		);
+		L.tileLayer("https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png", {
+			attribution:
+				'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+		}).addTo(this.#map);
+
+		this.#map.on("click", this._showForm.bind(this));
 	}
 
 	_showForm(mapE) {

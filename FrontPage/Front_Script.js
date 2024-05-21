@@ -6,7 +6,7 @@ const loginForm = document.querySelector("#loginForm");
 const registerForm = document.querySelector("#registerForm");
 
 document.addEventListener("DOMContentLoaded", () => {
-	loginModal.style.display = "flex"; // Show login modal by default
+	loginModal.style.display = "flex";
 });
 
 function closeModal(modalId) {
@@ -66,7 +66,7 @@ loginForm.addEventListener("submit", (event) => {
 		loginForm.reset();
 
 		sessionStorage.setItem("loggedInUser", username);
-		window.location.href = "../ProfileDashBoard/ProfileDashBoard.html";
+		window.location.href = "../ProfilePage/ProfilePage.html";
 	} else {
 		alert("Feil brukernavn eller passord. Vennligst prøv igjen.");
 	}

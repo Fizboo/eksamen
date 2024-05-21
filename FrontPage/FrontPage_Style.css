@@ -1,12 +1,5 @@
 /* General Styles */
-@import url('../Styles/Style.css');
-
-:root {
-  --color-primary: rgb(31, 68, 75);
-  --color-secondary: #4caf50;
-  --color-light: #e6e6e6;
-  --color-dark: #333;
-}
+@import url('../Style.css');
 
 /* Reset */
 * {
@@ -16,6 +9,7 @@
 }
 
 body, html {
+  overflow: hidden;
   height: 100%;
   font-family: Arial, sans-serif;
 }
@@ -27,17 +21,25 @@ header {
   text-align: center;
   padding: 20px;
   position: relative;
+  display: flex;            
+  justify-content: center;   
+  align-items: center;       
+  height: 120px;            
 }
 
 header img {
-  width: auto;
+  position: absolute;   
+  left: 20px;           
   height: 80px;
+  top: 50%;            
+  transform: translateY(-50%);
 }
 
 .header-login-btn {
-  position: absolute;
-  top: 20px;
-  right: 20px;
+  position: absolute;  
+  right: 20px;         
+  top: 50%;           
+  transform: translateY(-50%);
   background-color: var(--color-secondary);
   color: #fff;
   border: none;
@@ -46,6 +48,7 @@ header img {
   border-radius: 5px;
   font-size: 1rem;
 }
+
 
 .header-login-btn:hover {
   background-color: #45a049;
@@ -56,7 +59,7 @@ main {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: calc(100vh - 60px); /* 100vh minus header height */
+  height: calc(100vh - 60px);
 }
 
 .background-image {
@@ -72,64 +75,51 @@ main {
 
 /* Modal */
 .modal {
+  background-color: rgba(0, 0, 0, 0.7); 
+  display: flex;
+  align-items: center;
+  justify-content: center;
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: none;
-  align-items: center;
-  justify-content: center;
   z-index: 1000;
 }
 
+/* Modal Border and Shadow */
 .modal-content {
-  background-color: #fff;
+  background-color: #f8f8f8; 
   padding: 30px;
   border-radius: 10px;
-  position: relative;
-  max-width: 500px;
-  width: 100%;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border: 1px solid #ccc;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); 
+  width: 500px; 
   text-align: center;
 }
 
-.modal-content h2 {
-  margin-bottom: 20px;
-}
-
-.modal-content form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.modal-content label, 
-.modal-content input, 
-.modal-content p {
-  width: 100%;
-  margin: 10px 0;
-}
-
-.modal-content input[type="text"], 
-.modal-content input[type="password"] {
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  width: 90%;
-}
-
+/* Button Styling */
 .modal-content input[type="submit"] {
   background-color: var(--color-secondary);
-  color: #fff;
+  color: white;
   border: none;
-  padding: 10px 20px;
+  padding: 12px 20px;
   cursor: pointer;
   border-radius: 5px;
   font-size: 1rem;
-  margin-top: 10px;
+  transition: background-color 0.3s;
 }
+
+.modal-content input[type="submit"]:hover {
+  background-color: #45a049; 
+}
+
+/* Typography */
+.modal-content h2, .modal-content label, .modal-content p {
+  color: var(--color-dark); 
+  font-family: Arial, sans-serif;
+}
+
 
 .modal-content input[type="submit"]:hover {
   background-color: #45a049;
@@ -172,32 +162,39 @@ footer {
 }
 
 .modal-content {
-  background-color: #fff;
-  padding: 30px;
-  border-radius: 10px;
-  position: relative;
-  max-width: 500px;
-  width: 100%;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  text-align: center;
+  background-color: rgba(255, 255, 255, 0.9); 
+  padding: 40px;
+  border-radius: 15px; 
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  width: auto; 
+  max-width: 400px; 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative; 
 }
 
-.modal-content h2 {
-  margin-bottom: 20px;
+
+.modal-content input[type="text"],
+.modal-content input[type="password"] {
+  padding: 12px;
+  margin-bottom: 10px; 
+  border: 1px solid #ccc; 
+  border-radius: 8px; 
+  width: calc(100% - 24px); 
+  box-shadow: inset 0 1px 3px rgba(0,0,0,0.2); 
 }
 
-.modal-content p {
-  font-size: 1.2rem;
+/* Button styling in the modal */
+.modal-content input[type="submit"] {
+  margin-top: 20px; 
+  padding: 12px 20px;
+  width: 100%; 
+  border-radius: 8px; 
 }
 
-.close {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  background-color: red;
-  color: #fff;
-  border: none;
-  padding: 5px 10px;
-  border-radius: 50%;
-  cursor: pointer;
+/* Header login button to match modal submit button */
+.header-login-btn {
+  padding: 10px 20px;
+  border-radius: 8px;
 }
