@@ -1,188 +1,134 @@
 /* General Styles */
-body, html {
-  margin: 0;
-  padding: 0;
-  font-family: Arial, sans-serif;
-  background-color: #f5f5f5;
-  color: #333;
-}
+@import url('../Style.css');
 
+/* Header */
 header {
-  background-color: #333;
+  background-color: var(--color-primary);
   color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   padding: 20px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  position: relative;
 }
 
-.header-content {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
+.logo {
+  position: absolute;
+  left: 20px;
+  height: 80px;
 }
 
-header img.logo {
-  height: 50px;
-  margin-right: 20px;
+.title {
+  margin: 0 auto;
+  text-align: center;
 }
 
-header h1 {
-  margin: 0;
-}
-
-.header-buttons {
-  display: flex;
-  gap: 10px;
-}
-
-header button {
-  background-color: #4caf50;
-  color: white;
+.header-logout-btn {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: red;
+  color: #fff;
   border: none;
   padding: 10px 20px;
   cursor: pointer;
   border-radius: 5px;
+  font-size: 1rem;
 }
 
-header button:hover {
-  background-color: #45a049;
+.header-logout-btn:hover {
+  background-color: darkred;
 }
 
-.container {
-  display: flex;
-  padding: 20px;
+/* Grid Layout */
+.grid-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   gap: 20px;
+  padding: 20px;
+  height: calc(100vh - 160px); /* Adjust based on header and footer height */
 }
 
-.map-container {
-  flex: 1;
-  height: 600px;
+.left-column,
+.right-column {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  overflow: hidden;
 }
 
-.sidebar {
-  flex: 0.5;
-  background-color: #fff;
+section {
+  background-color: #f8f8f8;
   padding: 20px;
   border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  overflow-y: auto;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
-.form__row {
+section h2 {
+  color: var(--color-dark);
+  font-family: var(--font-family);
+}
+
+#exerciseForm label,
+#exerciseForm select,
+#exerciseForm input[type="number"],
+#exerciseForm input[type="submit"] {
   margin-bottom: 10px;
-}
-
-.form__label {
-  display: block;
-  margin-bottom: 5px;
-}
-
-.form__input {
   width: 100%;
-  padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
+  box-sizing: border-box;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
 }
 
-.form__btn {
-  background-color: #4caf50;
+#exerciseForm input[type="submit"] {
+  background-color: var(--color-secondary);
   color: white;
   border: none;
-  padding: 10px;
   cursor: pointer;
-  border-radius: 5px;
-  width: 100%;
+  font-size: 1rem;
+  transition: background-color 0.3s;
 }
 
-.form__btn:hover {
+#exerciseForm input[type="submit"]:hover:enabled {
   background-color: #45a049;
 }
 
-.user__training {
-  background-color: #fff;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  margin-top: 20px;
-}
-
-.user__training h2 {
-  margin-top: 0;
-}
-
-/* Modal */
-.modal {
-  display: none;
-  position: fixed;
-  z-index: 1;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-  background-color: rgba(0, 0, 0, 0.5);
-  justify-content: center;
-  align-items: center;
-}
-
-.modal-content {
-  background-color: #fefefe;
-  margin: 15% auto;
-  padding: 20px;
-  border: 1px solid #888;
-  width: 80%;
-  max-width: 500px;
-  border-radius: 10px;
-  position: relative;
-}
-
-.close {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  background-color: red;
-  color: #fff;
-  border: none;
-  padding: 5px 10px;
-  border-radius: 50%;
-  cursor: pointer;
-}
-
-/* Friends List */
-#addFriends, #friendList {
-  margin-bottom: 20px;
-}
-
-ul {
+#exerciseList {
   list-style-type: none;
   padding: 0;
 }
 
-ul li {
-  background-color: #f5f5f5;
-  margin: 5px 0;
-  padding: 10px;
-  border-radius: 5px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+#exerciseList li {
+  background-color: var(--color-light);
+  margin-bottom: 10px;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 }
 
-ul li button {
-  background-color: #4caf50;
+#map {
+  width: 100%;
+  height: 600px;
+  margin-bottom: 10px;
+}
+
+#logExerciseFromMap {
+  background-color: var(--color-secondary);
   color: white;
   border: none;
-  padding: 5px 10px;
+  padding: 12px;
+  border-radius: 8px;
   cursor: pointer;
-  border-radius: 5px;
+  font-size: 1rem;
 }
 
-ul li button:hover {
+#logExerciseFromMap:disabled {
+  background-color: #ddd;
+  cursor: not-allowed;
+}
+
+#logExerciseFromMap:hover:enabled {
   background-color: #45a049;
-}
-
-.hidden {
-  display: none;
 }

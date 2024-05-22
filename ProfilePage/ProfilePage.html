@@ -1,91 +1,62 @@
 <!DOCTYPE html>
-<html lang="no">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="./../AppStyle.css">
+  <link rel="stylesheet" href="../Style.css">
   <link rel="stylesheet" href="./ProfilePage_Style.css">
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css">
-  <script defer src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
-  <script defer src="./Profile_Script.js"></script> 
-  <title>TreningsLoggen</title>
+  <link rel="icon" href="data:," type="image/x-icon">
+  <title>Workout Logger - Profile</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 </head>
 <body>
   <header>
-    <div class="header-content">
-      <img src="../Assets/logo.png" alt="Logo" class="logo">
-      <h1 id="title">Profil Siden</h1>
-      <div class="header-buttons">
-        <button id="logOut">Logg ut</button>
-        <button id="friends">Venner</button>
-      </div>
-    </div>
+    <img src="../Assets/logo.png" alt="Logo" class="logo">
+    <h1 class="title">Profile Page</h1>
+    <button id="headerLogoutBtn" class="header-logout-btn">Logg ut</button>
   </header>
-  <main>
-    <div class="container">
-      <div class="sidebar">
-        <form class="form">
-          <div class="form__row">
-            <label class="form__label">Type</label>
-            <select class="form__input form__input--type">
-              <option value="running">Løping</option>
-              <option value="cycling">Sykling</option>
-            </select>
-          </div>
-          <div class="form__row">
-            <label class="form__label">Distanse</label>
-            <input class="form__input form__input--distance" placeholder="km">
-          </div>
-          <div class="form__row">
-            <label class="form__label">Varighet</label>
-            <input class="form__input form__input--duration" placeholder="min">
-          </div>
-          <div class="form__row">
-            <label class="form__label">Stegfrekvens</label>
-            <input class="form__input form__input--cadence" placeholder="steg/min">
-          </div>
-          <div class="form__row form__row--hidden">
-            <label class="form__label">Høydemeter</label>
-            <input class="form__input form__input--elevation" placeholder="meter">
-          </div>
-          <button class="form__btn">OK</button>
+
+  <main class="grid-container">
+    <div class="left-column">
+      <section id="addExercise">
+        <h2>Legg inn Øvelse</h2>
+        <form id="exerciseForm">
+          <label for="exerciseType">Type trening:</label>
+          <select id="exerciseType" name="type">
+            <option value="Løping">Løping</option>
+            <option value="Sykkling">Sykkling</option>
+            <option value="Jogging">Jogging</option>
+            <option value="Svømming">Svømming</option>
+          </select>
+          <br>
+          <label for="exerciseDuration">Varighet (minutter):</label>
+          <input type="number" id="exerciseDuration" name="duration" required>
+          <br>
+          <input type="submit" value="Legg til Øvelse" id="addExerciseButton" disabled>
         </form>
-        <div class="user__training">
-          <h2>Treningslogg</h2>
-          <div id="workout">
-            <h3>Siste Treningsøkt</h3>
-            <p>Bruker: <span id="workout__user"></span></p>
-            <p>Type: <span id="workout__type"></span></p>
-            <p>Distanse: <span id="workout__distance"></span></p>
-            <p>Varighet: <span id="workout__duration"></span></p>
-          </div>
-        </div>
-      </div>
-      <div id="map" class="map-container"></div>
+        <div id="exerciseResult"></div>
+      </section>
+
+      <section id="viewLog">
+        <h2>Gjennomførte Øvelser</h2>
+        <ul id="exerciseList"></ul>
+      </section>
+    </div>
+
+    <div class="right-column">
+      <section id="mapSection">
+        <h2>Kart</h2>
+        <div id="map" style="height: 600px;"></div>
+        <button id="logExerciseFromMap" disabled>Logg Øvelse fra Kart</button>
+      </section>
     </div>
   </main>
+
   <footer>
     <p>Copyright © 2023</p>
   </footer>
 
-  <!-- Venner Modal -->
-  <div id="friendsModal" class="modal">
-    <div class="modal-content">
-      <span class="close" id="closeFriendsModal">&times;</span>
-      <h2>Venner</h2>
-      <div id="addFriends">
-        <h3>Legg til venner</h3>
-        <ul id="potentialFriends">
-          <!-- Dynamic content -->
-        </ul>
-      </div>
-      <div id="friendList">
-        <h3>Venneliste</h3>
-        <ul id="friendsList">
-          <!-- Dynamic content -->
-        </ul>
-      </div>
-    </div>
-  </div>
+  <script src="./ProfilePage_Script.js"></script>
 </body>
 </html>
