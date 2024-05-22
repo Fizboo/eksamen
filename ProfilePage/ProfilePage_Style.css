@@ -9,25 +9,19 @@ header {
   justify-content: space-between;
   align-items: center;
   padding: 20px;
-  position: relative;
 }
 
 .logo {
-  position: absolute;
-  left: 20px;
   height: 80px;
 }
 
 .title {
-  margin: 0 auto;
+  flex: 1;
   text-align: center;
+  margin: 0;
 }
 
 .header-logout-btn {
-  position: absolute;
-  right: 20px;
-  top: 50%;
-  transform: translateY(-50%);
   background-color: red;
   color: #fff;
   border: none;
@@ -48,6 +42,7 @@ header {
   gap: 20px;
   padding: 20px;
   height: calc(100vh - 160px); /* Adjust based on header and footer height */
+  overflow: hidden;
 }
 
 .left-column,
@@ -70,31 +65,6 @@ section h2 {
   font-family: var(--font-family);
 }
 
-#exerciseForm label,
-#exerciseForm select,
-#exerciseForm input[type="number"],
-#exerciseForm input[type="submit"] {
-  margin-bottom: 10px;
-  width: 100%;
-  box-sizing: border-box;
-  padding: 12px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-}
-
-#exerciseForm input[type="submit"] {
-  background-color: var(--color-secondary);
-  color: white;
-  border: none;
-  cursor: pointer;
-  font-size: 1rem;
-  transition: background-color 0.3s;
-}
-
-#exerciseForm input[type="submit"]:hover:enabled {
-  background-color: #45a049;
-}
-
 #exerciseList {
   list-style-type: none;
   padding: 0;
@@ -106,6 +76,33 @@ section h2 {
   padding: 15px;
   border-radius: 8px;
   box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.coordinates {
+  font-size: 0.8rem;
+  color: var(--color-dark);
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+.coordinates:hover {
+  text-decoration: underline;
+}
+
+.delete-btn {
+  background-color: red;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.delete-btn:hover {
+  background-color: darkred;
 }
 
 #map {
@@ -114,7 +111,12 @@ section h2 {
   margin-bottom: 10px;
 }
 
-#logExerciseFromMap {
+.map-actions {
+  display: flex;
+  justify-content: center;
+}
+
+.action-btn {
   background-color: var(--color-secondary);
   color: white;
   border: none;
@@ -122,13 +124,87 @@ section h2 {
   border-radius: 8px;
   cursor: pointer;
   font-size: 1rem;
+  width: 200px;
 }
 
-#logExerciseFromMap:disabled {
+.action-btn:disabled {
   background-color: #ddd;
   cursor: not-allowed;
 }
 
-#logExerciseFromMap:hover:enabled {
+.action-btn:hover:enabled {
   background-color: #45a049;
+}
+
+/* Modal */
+.modal {
+  background-color: rgba(0, 0, 0, 0.7); 
+  display: none; /* Start with display none */
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1000;
+}
+
+/* Modal Border and Shadow */
+.modal-content {
+  background-color: rgba(255, 255, 255, 0.9); 
+  padding: 30px;
+  border-radius: 15px; 
+  border: 1px solid #ccc;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); 
+  width: auto; 
+  max-width: 500px; 
+  text-align: center;
+  position: relative; 
+  margin: auto;
+}
+
+/* Button Styling */
+.modal-content input[type="submit"] {
+  background-color: var(--color-secondary);
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  cursor: pointer;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: background-color 0.3s;
+}
+
+.modal-content input[type="submit"]:hover {
+  background-color: #45a049; 
+}
+
+/* Typography */
+.modal-content h2, .modal-content label, .modal-content p {
+  color: var(--color-dark); 
+  font-family: Arial, sans-serif;
+}
+
+.modal-content input[type="text"],
+.modal-content input[type="number"],
+.modal-content select {
+  padding: 12px;
+  margin-bottom: 10px; 
+  border: 1px solid #ccc; 
+  border-radius: 8px; 
+  width: calc(100% - 24px); 
+  box-shadow: inset 0 1px 3px rgba(0,0,0,0.2); 
+}
+
+.close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: red;
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 50%;
+  cursor: pointer;
 }

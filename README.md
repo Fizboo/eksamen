@@ -1,9 +1,9 @@
 # Js_Eksamen_GA
 
-## Mai 2023
-RandomUser API
+## Mai 2023 - Rebuild Mai 2024 ##
+
 Leaflet API
 
-Javascript eksamen //Ikke design fokus
 
-Resultat: B.
+
+

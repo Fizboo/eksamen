@@ -4,15 +4,33 @@ document.addEventListener("DOMContentLoaded", () => {
 	const exerciseResult = document.querySelector("#exerciseResult");
 	const headerLogoutBtn = document.querySelector("#headerLogoutBtn");
 	const logExerciseFromMap = document.querySelector("#logExerciseFromMap");
-	const addExerciseButton = document.querySelector("#addExerciseButton");
+	const addExerciseModal = document.querySelector("#addExerciseModal");
+	const closeModal = document.querySelector("#closeModal");
+
+	let marker = null;
+	let currentCoords = null;
 
 	// Leaflet map initialization
-	const map = L.map("map").setView([51.505, -0.09], 13);
+	const map = L.map("map");
+
+	// Geolocation to set map view to user's location
+	if (navigator.geolocation) {
+		navigator.geolocation.getCurrentPosition(
+			(position) => {
+				const { latitude, longitude } = position.coords;
+				map.setView([latitude, longitude], 13);
+			},
+			() => {
+				map.setView([51.505, -0.09], 13);
+			},
+		);
+	} else {
+		map.setView([51.505, -0.09], 13);
+	}
+
 	L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
 		maxZoom: 19,
 	}).addTo(map);
-
-	let marker = null;
 
 	const logout = () => {
 		sessionStorage.removeItem("loggedInUser");
@@ -24,11 +42,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
 		const type = document.querySelector("#exerciseType").value;
 		const duration = document.querySelector("#exerciseDuration").value;
+		const distance = document.querySelector("#exerciseDistance").value;
 
 		const exercise = {
 			type,
 			duration,
+			distance,
 			date: new Date().toISOString().split("T")[0],
+			coords: currentCoords,
 		};
 
 		const loggedInUser = sessionStorage.getItem("loggedInUser");
@@ -48,6 +69,7 @@ document.addEventListener("DOMContentLoaded", () => {
 		}
 
 		exerciseForm.reset();
+		closeModalPopup();
 	};
 
 	const loadExercises = () => {
@@ -56,45 +78,80 @@ document.addEventListener("DOMContentLoaded", () => {
 			const userExercises =
 				JSON.parse(localStorage.getItem(`${loggedInUser}_exercises`)) || [];
 			exerciseList.innerHTML = "";
-			for (const exercise of userExercises) {
+			userExercises.forEach((exercise, index) => {
 				const listItem = document.createElement("li");
-				listItem.textContent = `${exercise.date} - ${exercise.type} - ${exercise.duration} minutter`;
+				listItem.innerHTML = `${exercise.date} - ${exercise.type} - ${
+					exercise.duration
+				} minutter - ${
+					exercise.distance
+				} meter <span class="coordinates" onclick="zoomToMarker(${
+					exercise.coords.lat
+				}, ${exercise.coords.lng})">(${exercise.coords.lat.toFixed(
+					3,
+				)}, ${exercise.coords.lng.toFixed(3)})</span>`;
+				const deleteBtn = document.createElement("button");
+				deleteBtn.textContent = "Slett";
+				deleteBtn.classList.add("delete-btn");
+				deleteBtn.addEventListener("click", () => {
+					if (confirm("Vil du slette denne øvelsen?")) {
+						removeExercise(index);
+					}
+				});
+				listItem.appendChild(deleteBtn);
 				exerciseList.appendChild(listItem);
-			}
+
+				if (exercise.coords) {
+					const exerciseMarker = L.marker(exercise.coords).addTo(map);
+					exerciseMarker.on("click", () => {
+						if (confirm("Vil du slette denne markøren?")) {
+							removeExercise(index);
+						}
+					});
+				}
+			});
 		} else {
 			alert("Du må være logget inn for å se gjennomførte øvelser.");
 			window.location.href = "../FrontPage/FrontPage.html";
 		}
 	};
 
-	const logExerciseFromMapHandler = () => {
-		if (!marker) return;
-
-		const coords = marker.getLatLng();
-		const type = "Kart-basert øvelse";
-		const duration = 60; // This can be modified to get input from user
-
-		const exercise = {
-			type,
-			duration,
-			date: new Date().toISOString().split("T")[0],
-			coords,
-		};
-
+	const removeExercise = (index) => {
 		const loggedInUser = sessionStorage.getItem("loggedInUser");
 		if (loggedInUser) {
 			const userExercises =
 				JSON.parse(localStorage.getItem(`${loggedInUser}_exercises`)) || [];
-			userExercises.push(exercise);
+			const exerciseToRemove = userExercises[index];
+			if (exerciseToRemove.coords) {
+				map.eachLayer((layer) => {
+					if (
+						layer instanceof L.Marker &&
+						layer.getLatLng().equals(exerciseToRemove.coords)
+					) {
+						map.removeLayer(layer);
+					}
+				});
+			}
+			userExercises.splice(index, 1);
 			localStorage.setItem(
 				`${loggedInUser}_exercises`,
 				JSON.stringify(userExercises),
 			);
-			exerciseResult.textContent = "Øvelse lagt til fra kart!";
+			exerciseResult.textContent = "Øvelse fjernet!";
 			loadExercises();
-		} else {
-			exerciseResult.textContent =
-				"Du må være logget inn for å legge til øvelser.";
+		}
+	};
+
+	const openModal = () => {
+		exerciseResult.textContent = "";
+		addExerciseModal.style.display = "flex";
+	};
+
+	const closeModalPopup = () => {
+		addExerciseModal.style.display = "none";
+		if (marker) {
+			map.removeLayer(marker);
+			marker = null;
+			logExerciseFromMap.disabled = true;
 		}
 	};
 
@@ -103,12 +160,29 @@ document.addEventListener("DOMContentLoaded", () => {
 			map.removeLayer(marker);
 		}
 		marker = L.marker(e.latlng).addTo(map);
+		currentCoords = e.latlng;
 		logExerciseFromMap.disabled = false;
 	});
 
+	window.zoomToMarker = (lat, lng) => {
+		map.setView([lat, lng], 15);
+	};
+
 	headerLogoutBtn.addEventListener("click", logout);
 	exerciseForm.addEventListener("submit", handleSubmit);
-	logExerciseFromMap.addEventListener("click", logExerciseFromMapHandler);
+	logExerciseFromMap.addEventListener("click", openModal);
+	closeModal.addEventListener("click", closeModalPopup);
+	window.addEventListener("click", (event) => {
+		if (event.target === addExerciseModal) {
+			closeModalPopup();
+		}
+	});
+
+	const loggedInUser = sessionStorage.getItem("loggedInUser");
+	if (loggedInUser) {
+		document.getElementById("pageTitle").textContent =
+			`Profilsiden til ${loggedInUser}`;
+	}
 
 	loadExercises();
 });
