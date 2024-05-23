@@ -4,16 +4,15 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="../Style.css">
-  <link rel="stylesheet" href="./ProfilePage_Style.css">
   <link rel="icon" href="data:," type="image/x-icon">
-  <title>Workout Logger - Profile</title>
+  <title>Trenings Logg - Profile</title>
   <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 </head>
 <body>
   <header>
     <img src="../Assets/logo.png" alt="Logo" class="logo">
-    <h1 id="pageTitle" class="title">Profilsiden til</h1>
+    <h1 id="pageTitle" class="title">Profil</h1>
     <button id="headerLogoutBtn" class="header-logout-btn">Logg ut</button>
   </header>
 
@@ -30,7 +29,7 @@
         <h2>Kart</h2>
         <div id="map" style="height: 600px;"></div>
         <div id="mapActions" class="map-actions">
-          <button id="logExerciseFromMap" class="action-btn" disabled>Logg Øvelse fra Kart</button>
+          <button id="logExerciseFromMap" class="action-btn" disabled>Legg til øvelse</button>
         </div>
       </section>
     </div>
@@ -38,6 +37,7 @@
 
   <footer>
     <p>Copyright © 2023</p>
+    <button id="deleteUserBtn" class="delete-user-btn">Slett Bruker</button>
   </footer>
 
   <!-- Modal for adding exercise -->
@@ -57,7 +57,7 @@
         <label for="exerciseDuration">Varighet (minutter):</label>
         <input type="number" id="exerciseDuration" name="duration" required>
         <br>
-        <label for="exerciseDistance">Avstand (meter):</label>
+        <label for="exerciseDistance">Distanse (meter):</label>
         <input type="number" id="exerciseDistance" name="distance" required>
         <br>
         <input type="submit" value="Legg til Øvelse" id="addExerciseButton">
@@ -67,5 +67,7 @@
   </div>
 
   <script src="./ProfilePage_Script.js"></script>
+  <script src="./ProfilePage_Styling.js"></script>
+  <script src="../Style.js"></script>
 </body>
 </html>

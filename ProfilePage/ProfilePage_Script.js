@@ -6,31 +6,44 @@ document.addEventListener("DOMContentLoaded", () => {
 	const logExerciseFromMap = document.querySelector("#logExerciseFromMap");
 	const addExerciseModal = document.querySelector("#addExerciseModal");
 	const closeModal = document.querySelector("#closeModal");
+	const deleteUserBtn = document.querySelector("#deleteUserBtn");
 
 	let marker = null;
 	let currentCoords = null;
+	let mapInitialized = false;
+	let map = null;
 
-	// Leaflet map initialization
-	const map = L.map("map");
+	const initializeMap = () => {
+		if (!mapInitialized) {
+			map = L.map("map").setView([51.505, -0.09], 13);
 
-	// Geolocation to set map view to user's location
-	if (navigator.geolocation) {
-		navigator.geolocation.getCurrentPosition(
-			(position) => {
-				const { latitude, longitude } = position.coords;
-				map.setView([latitude, longitude], 13);
-			},
-			() => {
-				map.setView([51.505, -0.09], 13);
-			},
-		);
-	} else {
-		map.setView([51.505, -0.09], 13);
-	}
+			L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+				maxZoom: 19,
+			}).addTo(map);
 
-	L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-		maxZoom: 19,
-	}).addTo(map);
+			if (navigator.geolocation) {
+				navigator.geolocation.getCurrentPosition((position) => {
+					const { latitude, longitude } = position.coords;
+					map.setView([latitude, longitude], 13);
+				});
+			}
+
+			map.on("click", (e) => {
+				if (marker) {
+					map.removeLayer(marker);
+				}
+				marker = L.marker(e.latlng).addTo(map);
+				currentCoords = e.latlng;
+				logExerciseFromMap.disabled = false;
+				logExerciseFromMap.style.backgroundColor = "#45a049";
+				logExerciseFromMap.style.cursor = "pointer";
+			});
+
+			mapInitialized = true;
+		}
+	};
+
+	initializeMap();
 
 	const logout = () => {
 		sessionStorage.removeItem("loggedInUser");
@@ -78,17 +91,17 @@ document.addEventListener("DOMContentLoaded", () => {
 			const userExercises =
 				JSON.parse(localStorage.getItem(`${loggedInUser}_exercises`)) || [];
 			exerciseList.innerHTML = "";
-			userExercises.forEach((exercise, index) => {
+			for (const [index, exercise] of userExercises.entries()) {
 				const listItem = document.createElement("li");
 				listItem.innerHTML = `${exercise.date} - ${exercise.type} - ${
 					exercise.duration
-				} minutter - ${
-					exercise.distance
-				} meter <span class="coordinates" onclick="zoomToMarker(${
-					exercise.coords.lat
-				}, ${exercise.coords.lng})">(${exercise.coords.lat.toFixed(
-					3,
-				)}, ${exercise.coords.lng.toFixed(3)})</span>`;
+				} minutter - ${exercise.distance} meter 
+                <span class="coordinates" onclick="zoomToMarker(${
+									exercise.coords.lat
+								}, ${exercise.coords.lng})">
+                (${exercise.coords.lat.toFixed(
+									3,
+								)}, ${exercise.coords.lng.toFixed(3)})</span>`;
 				const deleteBtn = document.createElement("button");
 				deleteBtn.textContent = "Slett";
 				deleteBtn.classList.add("delete-btn");
@@ -108,7 +121,7 @@ document.addEventListener("DOMContentLoaded", () => {
 						}
 					});
 				}
-			});
+			}
 		} else {
 			alert("Du må være logget inn for å se gjennomførte øvelser.");
 			window.location.href = "../FrontPage/FrontPage.html";
@@ -152,17 +165,21 @@ document.addEventListener("DOMContentLoaded", () => {
 			map.removeLayer(marker);
 			marker = null;
 			logExerciseFromMap.disabled = true;
+			logExerciseFromMap.style.backgroundColor = "#ddd";
+			logExerciseFromMap.style.cursor = "not-allowed";
 		}
 	};
 
-	map.on("click", (e) => {
-		if (marker) {
-			map.removeLayer(marker);
+	const deleteUser = () => {
+		if (confirm("Er du sikker på at du vil slette brukeren din?")) {
+			const loggedInUser = sessionStorage.getItem("loggedInUser");
+			if (loggedInUser) {
+				sessionStorage.removeItem("loggedInUser");
+				localStorage.removeItem(`${loggedInUser}_exercises`);
+				window.location.href = "../FrontPage/FrontPage.html";
+			}
 		}
-		marker = L.marker(e.latlng).addTo(map);
-		currentCoords = e.latlng;
-		logExerciseFromMap.disabled = false;
-	});
+	};
 
 	window.zoomToMarker = (lat, lng) => {
 		map.setView([lat, lng], 15);
@@ -172,6 +189,8 @@ document.addEventListener("DOMContentLoaded", () => {
 	exerciseForm.addEventListener("submit", handleSubmit);
 	logExerciseFromMap.addEventListener("click", openModal);
 	closeModal.addEventListener("click", closeModalPopup);
+	deleteUserBtn.addEventListener("click", deleteUser);
+
 	window.addEventListener("click", (event) => {
 		if (event.target === addExerciseModal) {
 			closeModalPopup();
