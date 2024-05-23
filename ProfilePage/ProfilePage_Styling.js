@@ -11,16 +11,19 @@ document.addEventListener("DOMContentLoaded", () => {
 		display: "flex",
 		alignItems: "center",
 		padding: "20px",
-		justifyContent: "space-between",
+		position: "relative",
 	};
 
 	const logoStyles = {
 		height: "80px",
+		position: "absolute",
+		left: "20px",
 	};
 
 	const titleStyles = {
 		textAlign: "center",
 		margin: "0",
+		flex: 1,
 	};
 
 	const headerLogoutBtnStyles = {
@@ -31,6 +34,8 @@ document.addEventListener("DOMContentLoaded", () => {
 		cursor: "pointer",
 		borderRadius: "5px",
 		fontSize: "1rem",
+		position: "absolute",
+		right: "20px",
 	};
 
 	const headerLogoutBtnHoverStyles = {
@@ -182,10 +187,12 @@ document.addEventListener("DOMContentLoaded", () => {
 		backgroundColor: "var(--color-primary)",
 		color: "#fff",
 		display: "flex",
-		justifyContent: "space-between",
+		justifyContent: "center",
 		alignItems: "center",
 		padding: "10px 20px",
-		position: "relative",
+		position: "fixed",
+		bottom: "0",
+		width: "100%",
 	};
 
 	const deleteUserBtnStyles = {
@@ -195,6 +202,8 @@ document.addEventListener("DOMContentLoaded", () => {
 		padding: "10px 20px",
 		borderRadius: "5px",
 		cursor: "pointer",
+		position: "absolute",
+		right: "20px",
 	};
 
 	const deleteUserBtnHoverStyles = {

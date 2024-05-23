@@ -1,8 +1,8 @@
-# Workout Logger with Leaflet map #
+# Workout Logger with Leaflet map
 
 ## Mai 2023 - Rebuild Mai 2024
 
-Dette prosjektet er en treningslogg-applikasjon som bruker HTML, CSS og JavaScript. Applikasjonen inkluderer funksjoner for brukerregistrering, innlogging, og logging av treningsøkter ved hjelp av Leaflet API for kartfunksjonalitet.
+Dette prosjektet er en treningslogg-applikasjon som bruker HTML og JavaScript. Applikasjonen inkluderer funksjoner for brukerregistrering, innlogging, og logging av treningsøkter ved hjelp av Leaflet API for kartfunksjonalitet.
 
 ### Innholdsfortegnelse
 - [Om prosjektet](#om-prosjektet)
@@ -11,11 +11,10 @@ Dette prosjektet er en treningslogg-applikasjon som bruker HTML, CSS og JavaScri
 - [Bruk](#bruk)
 - [Skjermbilder](#skjermbilder)
 - [Teknologier brukt](#teknologier-brukt)
-- [Bidrag](#bidrag)
-- [Lisens](#lisens)
+
 
 ### Om prosjektet
-Dette prosjektet er en del av en eksamen i JavaScript i Mai 2023, med en oppdatering i Mai 2024. Målet er å lage en brukervennlig treningslogg-applikasjon hvor brukere kan registrere seg, logge inn og legge inn treningsøkter.
+Dette prosjektet er en eksamen i JavaScript i Mai 2023, med en oppdatering i Mai 2024(uten å endre så mye på opprinnelig kode). Målet er å lage en brukervennlig treningslogg-applikasjon hvor brukere kan registrere seg, logge inn og legge inn treningsøkter.
 
 ### Funksjoner
 - **Registrering og innlogging**: Brukere kan registrere seg og logge inn på applikasjonen.
@@ -26,8 +25,8 @@ Dette prosjektet er en del av en eksamen i JavaScript i Mai 2023, med en oppdate
 ### Installasjon
 1. **Klon repoet**:
     ```bash
-    git clone https://github.com/TommyS-NO/Simple-Workput-Logger.git
-    cd Simple-Workput-Logger
+    git clone https://github.com/TommyS-NO/Simple-Workout-Logger.git
+    cd Simple-Workout-Logger
     ```
 2. **Åpne index.html** 
 
@@ -50,13 +49,17 @@ Dette prosjektet er en del av en eksamen i JavaScript i Mai 2023, med en oppdate
 
 ### Skjermbilder
 #### Frontpage
-![Frontpage](path_to_your_image1)
+<div style="display: flex; justify-content: space-between;">
+    <img src="./Assets/Preview_Front.png" alt="Frontpage" width="45%">
+    <img src="./Assets/Preview_Front2.png" alt="Frontpage Register" width="45%">
+</div>
 
 #### Profilepage
-![Profilepage](path_to_your_image2)
-
-#### Legge til øvelse
-![AddExercise](path_to_your_image3)
+<div style="display: flex; justify-content: space-between;">
+    <img src="./Assets/Preview_Profile.png" alt="Profilepage Overview" width="45%">
+    <img src="./Assets/Preview_Profile2.png" alt="Profilepage Add Exercise" width="45%">
+    <img src="./Assets/Preview_Profile3.png" alt="Profilepage Added Exercise" width="45%">
+</div>
 
 ### Teknologier brukt
 - **HTML**
